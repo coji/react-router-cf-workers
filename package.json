@@ -7,10 +7,12 @@
     "build": "react-router build",
     "deploy": "wrangler deploy",
     "dev": "react-router dev",
-    "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "wrangler dev",
+    "typegen": "wrangler types",
+    "lint": "biome lint .",
+    "format": "prettier --check .",
     "typecheck": "tsc",
-    "typegen": "wrangler types"
+    "validate": "pnpm run lint && pnpm run format && pnpm run typecheck"
   },
   "dependencies": {
     "@react-router/cloudflare": "7.0.0-pre.1",
