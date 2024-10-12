@@ -12,7 +12,7 @@
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "types": [
-      "@remix-run/cloudflare",
+      "@react-router/cloudflare",
       "@cloudflare/workers-types",
       "vite/client"
     ],

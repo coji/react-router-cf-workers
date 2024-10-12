@@ -1,11 +1,11 @@
-import { createRequestHandler, type ServerBuild } from "@remix-run/cloudflare";
+import  { createRequestHandler, type  ServerBuild } from "react-router";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore This file won’t exist if it hasn’t yet been built
 import * as build from "./build/server"; // eslint-disable-line import/no-unresolved
 import { getLoadContext } from "./load-context";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const handleRemixRequest = createRequestHandler(build as any as ServerBuild);
+const requestHandler = createRequestHandler(build as any as ServerBuild);
 
 export default {
   async fetch(request, env, ctx) {
@@ -28,7 +28,7 @@ export default {
           },
         }
       });
-      return await handleRemixRequest(request, loadContext);
+      return await requestHandler(request, loadContext);
     } catch (error) {
       console.log(error);
       return new Response("An unexpected error occurred", { status: 500 });
