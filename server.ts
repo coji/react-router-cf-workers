@@ -1,11 +1,8 @@
-import  { createRequestHandler, type  ServerBuild } from "react-router";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore This file won’t exist if it hasn’t yet been built
-import * as build from "./build/server"; // eslint-disable-line import/no-unresolved
-import { getLoadContext } from "./load-context";
+import { createRequestHandler, type ServerBuild } from 'react-router'
+import * as build from './build/server'
+import { getLoadContext } from './load-context'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const requestHandler = createRequestHandler(build as any as ServerBuild);
+const requestHandler = createRequestHandler(build as unknown as ServerBuild)
 
 export default {
   async fetch(request, env, ctx) {
@@ -18,6 +15,7 @@ export default {
             // `getPlatformProxy` used during development via Remix's
             // `cloudflareDevProxyVitePlugin`:
             // https://developers.cloudflare.com/workers/wrangler/api/#getplatformproxy
+            // @ts-ignore
             cf: request.cf,
             ctx: {
               waitUntil: ctx.waitUntil.bind(ctx),
@@ -26,12 +24,12 @@ export default {
             caches,
             env,
           },
-        }
-      });
-      return await requestHandler(request, loadContext);
+        },
+      })
+      return await requestHandler(request, loadContext)
     } catch (error) {
-      console.log(error);
-      return new Response("An unexpected error occurred", { status: 500 });
+      console.log(error)
+      return new Response('An unexpected error occurred', { status: 500 })
     }
   },
-} satisfies ExportedHandler<Env>;
+} satisfies ExportedHandler<Env>
